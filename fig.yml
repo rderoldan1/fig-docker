@@ -1,0 +1,17 @@
+nginx: 
+  image: nginx
+  ports:
+    - '80:80' 
+db:
+  image: postgres
+  ports:
+    - "5432"
+web:
+  build: .
+  command: unicorn
+  volumes:
+    - .:/myapp
+  ports:
+    - "8080"
+  links:
+    - db
